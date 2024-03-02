@@ -6,7 +6,7 @@ function App() {
     <>
       <InputCard />
       <ResultCard />
-      <Warning1Popup />
+      {/* <Warning1Popup /> */}
     </>
   );
 }
