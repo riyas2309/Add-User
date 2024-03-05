@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 function InputCard(props) {
   const [value, setValue] = useState({
     name: "",
@@ -22,8 +22,8 @@ function InputCard(props) {
     };
     setlist((pre) => [...pre, data]);
     setValue({ name: "", age: "" });
-    props.onGetData(list);
   };
+  useEffect(() => props.onGetData(list), [list, props]);
 
   return (
     <div className=" mt-[5rem] p-5 bg-[#FFFF] flex items-center w-[50rem] rounded-lg">
