@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-function InputCard() {
+function InputCard(props) {
   const [value, setValue] = useState({
     name: "",
     age: "",
   });
+  const [list, setlist] = useState([]);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setValue((prev) => {
@@ -14,11 +15,16 @@ function InputCard() {
     });
   };
   const onSubmit = (event) => {
+    event.preventDefault();
     const data = {
       name: value.name,
       age: value.age,
     };
+    setlist((pre) => [...pre, data]);
+    setValue({ name: "", age: "" });
+    props.onGetData(list);
   };
+
   return (
     <div className=" mt-[5rem] p-5 bg-[#FFFF] flex items-center w-[50rem] rounded-lg">
       <form onSubmit={onSubmit}>
@@ -31,6 +37,7 @@ function InputCard() {
             className="border border-gray-400 w-[47rem]"
             name="name"
             onChange={handleChange}
+            value={value.name}
           />
         </div>
         <div className="flex flex-col pb-5">
@@ -42,8 +49,10 @@ function InputCard() {
             className="border border-gray-400 w-[47rem] "
             name="age"
             onChange={handleChange}
+            value={value.age}
           />
         </div>
+
         <button type="submit" className="p-2 bg-purple-500">
           Add User
         </button>
